@@ -3,6 +3,8 @@ import java.util.ArrayList;
 public class HashTable {
 	
 	private int p;
+	private Tuple[] table;
+	private HashFunction function;
 	
 	/*
 	 *  Finds the smallest prime integer p whose value is at least size. Creates
@@ -11,6 +13,8 @@ public class HashTable {
 	 */
 	public HashTable(int size){
 		this.p = HelperClass.getPrime(size);
+		table = new Tuple[p];
+		function = new HashFunction(p);
 	}
 	
 	//Returns the maximum load of the hash table
@@ -23,7 +27,7 @@ public class HashTable {
 	}
 	//returns the current size of the hash table
 	public int size() {
-		return size;
+		return p;
 	}
 	//returns the number of Tuples that are currently stored in the hash table.
 	public int numElements() {
