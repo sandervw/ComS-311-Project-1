@@ -3,8 +3,9 @@ import java.util.ArrayList;
 public class HashTable {
 	
 	private int p;
-	private Tuple[] table;
-	private HashFunction function;
+
+	private ArrayList<ArrayList<Tuple>> contents;
+	private HashFunction h;
 	
 	/*
 	 *  Finds the smallest prime integer p whose value is at least size. Creates
@@ -13,8 +14,8 @@ public class HashTable {
 	 */
 	public HashTable(int size){
 		this.p = HelperClass.getPrime(size);
-		table = new Tuple[p];
-		function = new HashFunction(p);
+		contents = new ArrayList<ArrayList<Tuple>>(p);
+		h = new HashFunction(p);
 	}
 	
 	//Returns the maximum load of the hash table
@@ -47,7 +48,23 @@ public class HashTable {
 	 * at least twice the current size.
 	 */
 	public void add(Tuple t) {
-		
+		//Find out which array list this is going into by hashing t.
+		int hash = h.hash(t.getKey());
+		contents.get(hash).add(t);
+	
+		//Then we find the new load factor, and see if its bigger than 0.7.
+		if(loadFactor() > .7){
+			p = HelperClass.getPrime(2*p);
+			ArrayList<ArrayList<Tuple>> newTable = contents;
+			contents = new ArrayList<ArrayList<Tuple>>(p); 
+			for(int i = 0; i < newTable.size(); i++){
+				for(int j = 0; j < newTable.get(i).size(); j++){
+					add(newTable.get(i).get(j));
+				}
+			}
+			
+			
+		}
 	}
 	
 	/*
