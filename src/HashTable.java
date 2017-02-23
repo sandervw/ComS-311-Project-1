@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class HashTable {
 	
-	private int size;
+	private int p;
 	
 	/*
 	 *  Finds the smallest prime integer p whose value is at least size. Creates
@@ -10,7 +10,7 @@ public class HashTable {
 	 *	used in the hash table by creating the object new HashFunction(p).
 	 */
 	public HashTable(int size){
-		this.size = size;
+		this.p = HelperClass.getPrime(size);
 	}
 	
 	//Returns the maximum load of the hash table

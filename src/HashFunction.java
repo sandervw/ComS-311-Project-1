@@ -1,6 +1,8 @@
 import java.util.Random;
 
-/* This class represents a random hash function that can be used in a hash table */
+/* 
+ * This class represents a random hash function that can be used in a hash table 
+ */
 public class HashFunction {
 	
 	private int a, b, p;
@@ -8,7 +10,7 @@ public class HashFunction {
 	/* Constructor */
 	public HashFunction(int range){
 		
-		this.p = getPrime(range);
+		this.p = HelperClass.getPrime(range);
 		Random rn = new Random();
 		this.b = rn.nextInt(p);
 		this.a = rn.nextInt(p);
@@ -53,30 +55,8 @@ public class HashFunction {
 
 	public void setP(int x){
 		
-		p = getPrime(x);
+		p = HelperClass.getPrime(x);
 		
-	}
-	
-	/* Get the first prime number who's value is >= range */
-	private int getPrime(int range){
-		
-		//first prime number
-		int x = 2;
-		
-		while(x<Integer.MAX_VALUE){
-			if(x>=range){
-				int count = 0;
-		        //increase count each time x is divisible by a whole number <= x
-		        for(int j = 1; j <= x; j++){
-		        	if(x%j == 0) count++;
-		        }
-		        //if x is prime return
-		        if(count == 2) return x;
-
-			}
-	        x++;
-	    }
-		return -1;
 	}
 
 }

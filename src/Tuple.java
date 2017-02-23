@@ -1,5 +1,7 @@
 
-/* This class represents tuples in the form of a key value pair */
+/* 
+ * This class represents tuples in the form of a key value pair 
+ */
 public class Tuple {
 	
 	private int key;
