@@ -4,7 +4,7 @@ public class HashTable {
 	
 	private int p;
 
-	private ArrayList<ArrayList<Tuple>> contents;
+	private Tuple[][] contents;
 	private HashFunction h;
 	
 	/*
@@ -14,7 +14,7 @@ public class HashTable {
 	 */
 	public HashTable(int size){
 		this.p = HelperClass.getPrime(size);
-		contents = new ArrayList<ArrayList<Tuple>>(p);
+		contents = new Tuple[p][p];
 		h = new HashFunction(p);
 	}
 	
@@ -32,7 +32,11 @@ public class HashTable {
 	}
 	//returns the number of Tuples that are currently stored in the hash table.
 	public int numElements() {
-		return -1;
+		int result = 0;
+		for(int i = 0; i < contents.length; i++){
+			result += contents[i].length;
+		}
+		return result;
 	}
 	
 	// return the load factor which is numElements()/size()
@@ -50,16 +54,16 @@ public class HashTable {
 	public void add(Tuple t) {
 		//Find out which array list this is going into by hashing t.
 		int hash = h.hash(t.getKey());
-		contents.get(hash).add(t);
+		contents[hash][contents[hash].length] = t;
 	
 		//Then we find the new load factor, and see if its bigger than 0.7.
 		if(loadFactor() > .7){
 			p = HelperClass.getPrime(2*p);
-			ArrayList<ArrayList<Tuple>> newTable = contents;
-			contents = new ArrayList<ArrayList<Tuple>>(p); 
-			for(int i = 0; i < newTable.size(); i++){
-				for(int j = 0; j < newTable.get(i).size(); j++){
-					add(newTable.get(i).get(j));
+			Tuple[][] newTable = contents.clone();
+			contents = new Tuple[p][p]; 
+			for(int i = 0; i < newTable.length; i++){
+				for(int j = 0; j < newTable[i].length; j++){
+					add(newTable[i][j]);
 				}
 			}
 			
@@ -80,7 +84,7 @@ public class HashTable {
 	
 	//Removes the Tuple t from the hash table.
 	public void remove(Tuple t){
-		
+		contents[h.hash(t.getKey())][t.]//Reference to matching element??
 	}
 	
 }
