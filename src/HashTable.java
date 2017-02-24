@@ -4,7 +4,7 @@ public class HashTable {
 	
 	private int p;
 
-	private Tuple[][] contents;
+	private Tuple[] contents;
 	private HashFunction h;
 	
 	/*
@@ -14,7 +14,7 @@ public class HashTable {
 	 */
 	public HashTable(int size){
 		this.p = HelperClass.getPrime(size);
-		contents = new Tuple[p][p];
+		contents = new Tuple[p];
 		h = new HashFunction(p);
 	}
 	
@@ -22,19 +22,26 @@ public class HashTable {
 	public int maxLoad(){
 		int result = 0;
 		for(int i = 0; i < contents.length; i++){
-			if(contents[i].length > result){
-				result = contents[i].length;
+			Tuple temp = contents[i];
+			int counter = 0;
+			while(temp != null){
+				counter++;
+				temp = temp.getNext();
 			}
+			if(counter>= result) result = counter;
 		}
 		return result;
 	}
 	//Returns the average load of the hash table
+	//Average load is not the same as load factor
+	//Average load is sum of contents[i]/number of i, where i is not null
 	public int averageLoad(){
-		int result = 0;
+		int nonNullLists = 0;
 		for(int i = 0; i < contents.length; i++){
-				result += contents[i].length;
+			Tuple temp = contents[i];
+			if(temp!= null) nonNullLists +=1;
 		}
-		return result/p;
+		return this.numElements()/nonNullLists;
 	}
 	//returns the current size of the hash table
 	public int size() {
@@ -44,7 +51,13 @@ public class HashTable {
 	public int numElements() {
 		int result = 0;
 		for(int i = 0; i < contents.length; i++){
-			result += contents[i].length;
+			Tuple temp = contents[i];
+			int counter = 0;
+			while(temp != null){
+				counter++;
+				temp = temp.getNext();
+			}
+			result += counter;
 		}
 		return result;
 	}
@@ -64,20 +77,28 @@ public class HashTable {
 	public void add(Tuple t) {
 		//Find out which array list this is going into by hashing t.
 		int hash = h.hash(t.getKey());
-		contents[hash][contents[hash].length] = t;
-	
+		//add the tuple into the hash table
+		if(contents[hash]==null) contents[hash] = t;
+		else{
+			Tuple temp = contents[hash];
+			while(temp.getNext() != null){
+				temp = temp.getNext();
+			}
+			temp.setNext(t);
+		}
 		//Then we find the new load factor, and see if its bigger than 0.7.
-		if(loadFactor() > .7){
+		if(this.loadFactor() > .7){
 			p = HelperClass.getPrime(2*p);
-			Tuple[][] newTable = contents.clone();
-			contents = new Tuple[p][p]; 
+			Tuple[] newTable = contents.clone();
+			contents = new Tuple[p]; 
 			for(int i = 0; i < newTable.length; i++){
-				for(int j = 0; j < newTable[i].length; j++){
-					add(newTable[i][j]);
+				Tuple temp = newTable[i];
+				this.add(temp);
+				while(temp != null){
+					temp = temp.getNext();
+					this.add(temp);
 				}
 			}
-			
-			
 		}
 	}
 	
@@ -88,12 +109,23 @@ public class HashTable {
 	 * 
 	 */
 	public ArrayList<Tuple> search(int k) {
+		//hash the value of k to get the index of the hashtable
+		int hash = h.hash(k);
 		ArrayList<Tuple> result = new ArrayList<Tuple>();
+		if(contents[hash] == null) return result;
+		else{
+			Tuple temp = contents[hash];
+			while(temp != null){
+				result.add(temp);
+				temp = temp.getNext();
+			}
+		}
 		return result;
 	}
 	
 	//Removes the Tuple t from the hash table.
 	public void remove(Tuple t){
+		int hash = h.hash(t.getKey());
 		//????????????????????????????????????????????????????????????????
 		//????????????????????????????????????????????????????????????????
 		//????????????????????????????????????????????????????????????????
