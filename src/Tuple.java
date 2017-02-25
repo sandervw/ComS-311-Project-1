@@ -7,6 +7,7 @@ public class Tuple {
 	private int key;
 	private float value;
 	private Tuple next;
+	public int[] movieRatings;
 	
 	/**
 	 *  Constructor 
