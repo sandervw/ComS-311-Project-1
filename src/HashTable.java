@@ -49,7 +49,7 @@ public class HashTable {
 	 * Average load is sum of contents[i]/number of i, where i is not null
 	 * @return The average load of the hash table.
 	 */
-	public int averageLoad() {
+	public float averageLoad() {
 		int nonNullLists = 0;
 		//for each index in the table
 		for (int i = 0; i < contents.length; i++) {
@@ -59,7 +59,7 @@ public class HashTable {
 				nonNullLists += 1;
 		}
 		//return the total number of elements divided by the number of non-null lists
-		return this.numElements() / nonNullLists;
+		return (float)this.numElements() / (float)nonNullLists;
 	}
 
 	/**
@@ -82,8 +82,8 @@ public class HashTable {
 	 * return the load factor which is numElements()/size()
 	 * @return The load factor (numElements()/size()) of the hash table.
 	 */
-	public double loadFactor() {
-		return ((double)numElements() / (double)size());
+	public float loadFactor() {
+		return ((float)numElements() / (float)size());
 	}
 
 	/**
@@ -110,7 +110,6 @@ public class HashTable {
 		numElements++;
 		//Then we find the new load factor, and see if its bigger than 0.7.
 		if (this.loadFactor() > .7) {
-			System.out.println("Adjusted Load Factor");
 			//re-factor p to be the first prime greater than 2p
 			p = HelperClass.getPrime(2 * p);
 			//clone the contents of the table into a new table

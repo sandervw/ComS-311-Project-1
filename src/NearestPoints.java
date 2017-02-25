@@ -4,14 +4,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class NearestPoint {
+public class NearestPoints {
 	
 	private int p;
 	private ArrayList<Float> list;
 	private HashTable table;
 
 	// The variable dataFile holds the absolute path of the file that contains the set of points S.
-	public NearestPoint(String dataFile) {
+	public NearestPoints(String dataFile) {
 		
 		int tempSize = 0;
 		
@@ -32,10 +32,13 @@ public class NearestPoint {
 		s.close();
 		//initialize p
 		this.p = tempSize;
+		
+		//build the data structure
+		this.buildDataStructure();
 	}
 
 	//The array list pointSet contains the set of points S.
-	public NearestPoint(ArrayList<Float> pointSet) {
+	public NearestPoints(ArrayList<Float> pointSet) {
 		int tempSize = 0;
 		list = new ArrayList<Float>();
 		for(int i = 0; i < pointSet.size(); i++){
@@ -44,6 +47,9 @@ public class NearestPoint {
 		}
 		//initialize p
 		this.p = tempSize;
+		
+		//build the data structure
+		this.buildDataStructure();
 	}
 
 	/*

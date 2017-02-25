@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class RecSys {
 	
-	private NearestPoint hashSolver;
+	private NearestPoints hashSolver;
 	private java.util.Hashtable<Float, int[]> movieHash = new Hashtable<Float, int[]>();
 	ArrayList<Float> users;
 	
@@ -37,7 +37,7 @@ public class RecSys {
 				}
 				movieHash.put(Float.parseFloat(line[0]), movieRatings.clone());
 			}
-			hashSolver = new NearestPoint(users);
+			hashSolver = new NearestPoints(users);
 			hashSolver.buildDataStructure();
 			s.close();		
 		} 
