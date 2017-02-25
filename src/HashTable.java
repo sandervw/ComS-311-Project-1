@@ -97,10 +97,11 @@ public class HashTable {
 		}
 		//Then we find the new load factor, and see if its bigger than 0.7.
 		if(this.loadFactor() > .7){
-			//refactor p to be the first prime greater than 2p
+			//re-factor p to be the first prime greater than 2p
 			p = HelperClass.getPrime(2*p);
 			//clone the contents of the table into a new table
 			Tuple[] newTable = contents.clone();
+			h = new HashFunction(p);
 			contents = new Tuple[p]; 
 			//for each index in newTable
 			for(int i = 0; i < newTable.length; i++){

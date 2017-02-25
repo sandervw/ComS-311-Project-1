@@ -11,6 +11,7 @@ public class HashFunction {
 	public HashFunction(int range){
 		
 		this.p = HelperClass.getPrime(range);
+		if (p<0) p = p*-1;
 		Random rn = new Random();
 		this.b = rn.nextInt(p);
 		this.a = rn.nextInt(p);
@@ -20,6 +21,11 @@ public class HashFunction {
 	
 	public int hash(int x){
 		int val = (a*x + b)%p;
+		if (val < 0) {
+
+		    val += p;
+
+		}
 		return val;
 	}
 
@@ -56,6 +62,9 @@ public class HashFunction {
 	public void setP(int x){
 		
 		p = HelperClass.getPrime(x);
+		Random rn = new Random();
+		this.b = rn.nextInt(p);
+		this.a = rn.nextInt(p);
 		
 	}
 
