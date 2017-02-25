@@ -6,9 +6,9 @@ public class HashTable {
 	private int p;
 
 	
-	private ArrayList<LinkedList> tempcontents;
 	private Tuple[] contents;
 	private HashFunction h;
+	private int numElements;
 	
 	/*
 	 *  Finds the smallest prime integer p whose value is at least size. Creates
@@ -18,8 +18,8 @@ public class HashTable {
 	public HashTable(int size){
 		this.p = HelperClass.getPrime(size);
 		contents = new Tuple[p];
-		tempcontents = new ArrayList<LinkedList>(p);
 		h = new HashFunction(p);
+		numElements = 0;
 	}
 	
 	//Returns the maximum load of the hash table
@@ -62,17 +62,7 @@ public class HashTable {
 	
 	//returns the number of Tuples that are currently stored in the hash table.
 	public int numElements() {
-		int result = 0;
-		for(int i = 0; i < contents.length; i++){
-			Tuple temp = contents[i];
-			int counter = 0;
-			while(temp != null){
-				counter++;
-				temp = temp.getNext();
-			}
-			result += counter;
-		}
-		return result;
+		return numElements;
 	}
 	
 	// return the load factor which is numElements()/size()
@@ -101,7 +91,7 @@ public class HashTable {
 		}
 		//System.out.println("Added tuple with key = " + t.getKey() + ", value = " + t.getValue() + ", hash = " + hash);
 		//Then we find the new load factor, and see if its bigger than 0.7.
-		/*if(this.loadFactor() > .7){
+		if(this.loadFactor() > .7){
 			System.out.println("Adjusted Load Factor");
 			//re-factor p to be the first prime greater than 2p
 			p = HelperClass.getPrime(2*p);
@@ -119,7 +109,8 @@ public class HashTable {
 					this.add(temp);
 				}
 			}
-		}*/
+		}
+		numElements++;
 	}
 	
 	/*
@@ -175,6 +166,7 @@ public class HashTable {
 				}
 			}
 		}
+		numElements--;
 	}
 	
 }
