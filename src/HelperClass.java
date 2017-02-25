@@ -3,7 +3,11 @@
  */
 public class HelperClass {
 	
-	/* Get the first prime number who's value is >= range */
+	/**
+	 *  Get the first prime number who's value is >= range.
+	 *  @param range The range of the prime numbers.
+	 *  @return The prime number found within the range.
+	 */
 	public static int getPrime(int range){
 		
 		//first prime number

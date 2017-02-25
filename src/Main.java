@@ -3,7 +3,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		NearestPoint test = new NearestPoint("C:/Users/Sander/Documents/ComS-311-Project-1/points.txt");
+		NearestPoint test = new NearestPoint("points.txt");
 		
 		long startTime = System.currentTimeMillis();
 		test.buildDataStructure();

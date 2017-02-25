@@ -7,7 +7,10 @@ public class HashFunction {
 	
 	private int a, b, p;
 	
-	/* Constructor */
+	/**
+	 * Constructor for the hash function.
+	 * @param range The range of the hash function.
+	 */
 	public HashFunction(int range){
 		
 		this.p = HelperClass.getPrime(range);
@@ -19,6 +22,11 @@ public class HashFunction {
 		
 	}
 	
+	/**
+	 * Returns the hashed value of x.
+	 * @param x The value to be hashed.
+	 * @return The hashed value.
+	 */
 	public int hash(int x){
 		int val = (a*x + b)%p;
 		if (val < 0) {

@@ -8,7 +8,11 @@ public class Tuple {
 	private float value;
 	private Tuple next;
 	
-	/* Constructor */
+	/**
+	 *  Constructor 
+	 *  @param keyP
+	 *  @param valueP
+	 */
 	public Tuple(int keyP, float valueP){
 		
 		this.key = keyP;
@@ -37,14 +41,20 @@ public class Tuple {
 	}
 	
 	
-	//Get the tuple pointed to by this one
+	/**
+	 * Get the tuple pointed to by this one
+	 * @return The tuple that this tuple is pointing to.
+	 */
 	public Tuple getNext(){
 		
 		return next;
 		
 	}
 	
-	//Set the tuple that this tuple points to
+	/**
+	 * Set the tuple that this tuple points to
+	 * @param t The tuple that this tuple will point to.
+	 */
 	public void setNext(Tuple t){
 		
 		this.next = t;
