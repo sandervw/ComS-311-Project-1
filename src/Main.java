@@ -17,6 +17,12 @@ public class Main {
 		totalTime = endTime - startTime;
 		System.out.println(totalTime);
 		
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("\n");
+		
 		startTime = System.currentTimeMillis();
 		test.allNearestPointsHash();
 		endTime   = System.currentTimeMillis();

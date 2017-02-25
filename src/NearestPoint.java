@@ -103,11 +103,12 @@ public class NearestPoint {
 	public void allNearestPointsNaive(){
 		for(int i = 0; i < list.size(); i++){
 			ArrayList<Float> tempResults = naiveNearestPoints(list.get(i));
-			//System.out.println("Points near " + list.get(i) + " are: ");
-			//for(int j = 0; j<tempResults.size(); j++){
-				//System.out.println(tempResults.get(j) + ", ");
-			//}
-			//System.out.println("\n");
+			if(i > 99900){
+				System.out.println("Points near " + list.get(i) + " are: ");
+				for(int j = 0; j<tempResults.size(); j++){
+					if(tempResults.get(j) != null) System.out.println(tempResults.get(j) + ", ");
+				}
+			}
 		}
 	}
 
@@ -119,11 +120,12 @@ public class NearestPoint {
 	public void allNearestPointsHash(){
 		for(int i = 0; i < list.size(); i++){
 			ArrayList<Float> tempResults = npHashNearestPoints(list.get(i));
-			//System.out.println("Points near " + list.get(i) + " are: ");
-			//for(int j = 0; j<tempResults.size(); j++){
-				//System.out.println(tempResults.get(j) + ", ");
-			//}
-			//System.out.println("\n");
+			if(i > 99900){
+				System.out.println("Points near " + list.get(i) + " are: ");
+				for(int j = 0; j<tempResults.size(); j++){
+					if(tempResults.get(j) != null) System.out.println(tempResults.get(j) + ", ");
+				}
+			}
 		}
 	}
 
