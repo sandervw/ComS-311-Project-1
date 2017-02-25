@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class HashTable {
 	
 	private int p;
 
+	
+	private ArrayList<LinkedList> tempcontents;
 	private Tuple[] contents;
 	private HashFunction h;
 	
@@ -15,6 +18,7 @@ public class HashTable {
 	public HashTable(int size){
 		this.p = HelperClass.getPrime(size);
 		contents = new Tuple[p];
+		tempcontents = new ArrayList<LinkedList>(p);
 		h = new HashFunction(p);
 	}
 	
@@ -95,8 +99,10 @@ public class HashTable {
 			}
 			temp.setNext(t); //set t as the next element in the linked list
 		}
+		//System.out.println("Added tuple with key = " + t.getKey() + ", value = " + t.getValue() + ", hash = " + hash);
 		//Then we find the new load factor, and see if its bigger than 0.7.
-		if(this.loadFactor() > .7){
+		/*if(this.loadFactor() > .7){
+			System.out.println("Adjusted Load Factor");
 			//re-factor p to be the first prime greater than 2p
 			p = HelperClass.getPrime(2*p);
 			//clone the contents of the table into a new table
@@ -113,7 +119,7 @@ public class HashTable {
 					this.add(temp);
 				}
 			}
-		}
+		}*/
 	}
 	
 	/*
@@ -132,7 +138,7 @@ public class HashTable {
 			Tuple temp = contents[hash];
 			//for each element in the linked list, add it to the arraylist
 			while(temp != null){
-				result.add(temp);
+				if(temp.getKey() == k) result.add(temp);
 				temp = temp.getNext();
 			}
 		}
