@@ -11,13 +11,12 @@ public class Main {
 		long totalTime = endTime - startTime;
 		System.out.println(totalTime);
 		
+		
 		startTime = System.currentTimeMillis();
 		test.allNearestPointsNaive();
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
 		System.out.println(totalTime);
-		
-		System.out.println("\n");
 		
 		startTime = System.currentTimeMillis();
 		test.allNearestPointsHash();

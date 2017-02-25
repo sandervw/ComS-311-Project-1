@@ -69,6 +69,7 @@ public class HashFunction {
 	public void setP(int x){
 		
 		p = HelperClass.getPrime(x);
+		if (p<0) p = p*-1;
 		Random rn = new Random();
 		this.b = rn.nextInt(p);
 		this.a = rn.nextInt(p);

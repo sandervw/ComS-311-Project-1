@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -83,13 +84,13 @@ public class NearestPoint {
 		ArrayList<Tuple> tempResults3 = table.search(key+1);
 		ArrayList<Float> results = new ArrayList<Float>();
 		for(int i = 0; i < tempResults1.size(); i++){
-			if (Math.abs(tempResults1.get(i).getValue() - p) <=1) results.add(tempResults1.get(i).getValue());
+			if (Math.abs(p-tempResults1.get(i).getValue()) <=1) results.add(tempResults1.get(i).getValue());
 		}
 		for(int i = 0; i < tempResults2.size(); i++){
-			if (Math.abs(tempResults2.get(i).getValue() - p) <=1) results.add(tempResults2.get(i).getValue());
+			if (Math.abs(p-tempResults2.get(i).getValue()) <=1) results.add(tempResults2.get(i).getValue());
 		}
 		for(int i = 0; i < tempResults3.size(); i++){
-			if (Math.abs(tempResults3.get(i).getValue() - p) <=1) results.add(tempResults3.get(i).getValue());
+			if (Math.abs(p-tempResults3.get(i).getValue()) <=1) results.add(tempResults3.get(i).getValue());
 		}
 		return results;
 	}
@@ -98,9 +99,23 @@ public class NearestPoint {
 	are close to p by calling the method NaiveNearestPoints(p). Write the results to a file named
 	NaiveSolution.txt*/
 	public void allNearestPointsNaive(){
-		for(int i = 0; i < list.size(); i++){
-			ArrayList<Float> tempResults = naiveNearestPoints(list.get(i));
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter("NaiveSolution.txt");
+			String tempString;
+			ArrayList<Float> tempResults;
+			for(int i = 0; i < list.size(); i++){
+				tempString = Float.toString(list.get(i));
+				tempResults = naiveNearestPoints(list.get(i));
+				for(int j = 0;j<tempResults.size();j++){
+					tempString += " " + tempResults.get(j);
+				}
+				out.println(tempString + "\n");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
+		out.close();
 	}
 
 	/*
@@ -109,9 +124,23 @@ public class NearestPoint {
 	HashSolution.txt. The expected time of this method must be O(n+PS N(p)); otherwise you
 	will receive zero credit.*/
 	public void allNearestPointsHash(){
-		for(int i = 0; i < list.size(); i++){
-			ArrayList<Float> tempResults = npHashNearestPoints(list.get(i));
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter("HashSolution.txt");
+			String tempString;
+			ArrayList<Float> tempResults;
+			for(int i = 0; i < list.size(); i++){
+				tempString = Float.toString(list.get(i));
+				tempResults = npHashNearestPoints(list.get(i));
+				for(int j = 0;j<tempResults.size();j++){
+					tempString += " " + tempResults.get(j);
+				}
+				out.println(tempString + "\n");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
+		out.close();
 	}
 
 }

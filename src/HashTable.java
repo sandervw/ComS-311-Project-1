@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class HashTable {
 
@@ -118,22 +117,20 @@ public class HashTable {
 			Tuple[] newTable = contents.clone();
 			h = new HashFunction(p);
 			contents = new Tuple[p];
+			numElements=0;
 			//for each index in newTable
 			Tuple temp2;
 			for (int i = 0; i < newTable.length; i++) {
 				Tuple temp = newTable[i];
 				if(temp!= null){
-					temp2 = temp;
-					temp2.setNext(null);
+					temp2 = new Tuple(temp.getKey(), temp.getValue());
 					this.add(temp2);
 					//iterate through the elements in the linked list in newTable, and re-add them to this hashTable
 					while (temp.getNext() != null) {
 						temp = temp.getNext();
-						temp2 = temp;
+						temp2 = new Tuple(temp.getKey(), temp.getValue());
 						this.add(temp2);
-						
 					}
-					temp.setNext(null);
 				}
 			}
 		}
