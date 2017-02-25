@@ -79,12 +79,15 @@ public class NearestPoint {
 	must be O(N(p)); otherwise you will receive zero credit.*/
 	public ArrayList<Float> npHashNearestPoints(float p) {
 		int key = (int)Math.floor(p);
-		ArrayList<Tuple> tempResults1 = table.search(key-1);
+		ArrayList<Tuple> tempResults1 = null;
+		if(key>=1) tempResults1 = table.search(key-1);
 		ArrayList<Tuple> tempResults2 = table.search(key);
 		ArrayList<Tuple> tempResults3 = table.search(key+1);
 		ArrayList<Float> results = new ArrayList<Float>();
-		for(int i = 0; i < tempResults1.size(); i++){
-			if (Math.abs(p-tempResults1.get(i).getValue()) <=1) results.add(tempResults1.get(i).getValue());
+		if(key>=1){
+			for(int i = 0; i < tempResults1.size(); i++){
+				if (Math.abs(p-tempResults1.get(i).getValue()) <=1) results.add(tempResults1.get(i).getValue());
+			}
 		}
 		for(int i = 0; i < tempResults2.size(); i++){
 			if (Math.abs(p-tempResults2.get(i).getValue()) <=1) results.add(tempResults2.get(i).getValue());

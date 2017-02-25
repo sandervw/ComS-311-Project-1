@@ -4,7 +4,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		NearestPoint test = new NearestPoint("points.txt");
-		
+		/*
 		long startTime = System.currentTimeMillis();
 		test.buildDataStructure();
 		long endTime = System.currentTimeMillis();
@@ -23,9 +23,16 @@ public class Main {
 		endTime   = System.currentTimeMillis();
 		totalTime = endTime - startTime;
 		System.out.println(totalTime);
+		*/
 		
-		//test.allNearestPointsNaive();
-
+		RecSys test2 = new RecSys("mrMatrix1.txt");
+		
+		long startTime = System.currentTimeMillis();
+		System.out.println(test2.ratingOf(2, 1));
+		long endTime = System.currentTimeMillis();
+		long totalTime = endTime - startTime;
+		System.out.println(totalTime);
+		
 	}
 
 }
