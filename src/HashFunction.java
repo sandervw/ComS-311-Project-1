@@ -18,7 +18,6 @@ public class HashFunction {
 		Random rn = new Random();
 		this.b = rn.nextInt(p);
 		this.a = rn.nextInt(p);
-		System.out.println(p + ", " + b + ", " + a);
 		
 	}
 	

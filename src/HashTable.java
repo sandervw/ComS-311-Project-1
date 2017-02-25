@@ -84,7 +84,7 @@ public class HashTable {
 	 * @return The load factor (numElements()/size()) of the hash table.
 	 */
 	public double loadFactor() {
-		return (numElements() / size());
+		return ((double)numElements() / (double)size());
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class HashTable {
 			}
 			temp.setNext(t); //set t as the next element in the linked list
 		}
-		//System.out.println("Added tuple with key = " + t.getKey() + ", value = " + t.getValue() + ", hash = " + hash);
+		numElements++;
 		//Then we find the new load factor, and see if its bigger than 0.7.
 		if (this.loadFactor() > .7) {
 			System.out.println("Adjusted Load Factor");
@@ -119,17 +119,24 @@ public class HashTable {
 			h = new HashFunction(p);
 			contents = new Tuple[p];
 			//for each index in newTable
+			Tuple temp2;
 			for (int i = 0; i < newTable.length; i++) {
 				Tuple temp = newTable[i];
-				this.add(temp);
-				//iterate through the elements in the linked list in newTable, and re-add them to this hashTable
-				while (temp != null) {
-					temp = temp.getNext();
-					this.add(temp);
+				if(temp!= null){
+					temp2 = temp;
+					temp2.setNext(null);
+					this.add(temp2);
+					//iterate through the elements in the linked list in newTable, and re-add them to this hashTable
+					while (temp.getNext() != null) {
+						temp = temp.getNext();
+						temp2 = temp;
+						this.add(temp2);
+						
+					}
+					temp.setNext(null);
 				}
 			}
 		}
-		numElements++;
 	}
 
 	/**
